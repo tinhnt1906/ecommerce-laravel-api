@@ -43,7 +43,8 @@ class AuthController extends Controller
         return $this->createNewToken($token);
     }
 
-    public function logout() {
+    public function logout()
+    {
         auth()->logout();
         return response()->json([
             'success' => true,
@@ -51,14 +52,17 @@ class AuthController extends Controller
         ]);
     }
 
-    public function userProfile(){
+    public function userProfile()
+    {
         return response()->json([
             'success' => true,
             'user' => auth()->user()
         ]);
     }
 
-    public function refresh(){
+    public function refresh()
+    {
+
         return $this->createNewToken(auth()->refresh());
     }
 

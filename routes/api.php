@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FrontendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,18 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('search/{search}', [FrontendController::class, 'search']);
+Route::get('get-categories', [FrontendController::class, 'getCategories']);
 
-Route::post('categories/{category}', [CategoryController::class, 'update']);
-Route::apiResource('categories', CategoryController::class);
+
+Route::middleware(['api','isAdmin'])->group(function () {
+    Route::post('categories/{category}', [CategoryController::class, 'update']);
+    Route::apiResource('categories', CategoryController::class);
+
+    Route::post('products/{product}', [ProductController::class, 'update']);
+    Route::apiResource('products', ProductController::class);
+});
+
 
 
 Route::group([

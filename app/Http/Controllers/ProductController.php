@@ -2,42 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\File;
-use App\Http\Requests\CategoryRequest;
 
-
-class CategoryController extends Controller
+class ProductController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api');
-    // }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        try {
-            $categories = Category::all();
-            return response()->json([
-                'success' => true,
-                'categories' => $categories
-            ]);
-        } catch (Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage(),
-            ]);
-        }
+        $products = Product::orderBy('id','desc')->with('category')->get();
+        return response()->json([
+            'success' => true,
+            'products' => $products
+        ]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -45,29 +26,33 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         try {
-            $category = new Category();
+            $product = new Product();
 
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
                 $filename = rand() . '' . time() . '.' . $extension;
-                $file->move('uploads/categories/', $filename);
-                $image_path = 'uploads/categories/' . $filename;
+                $file->move('uploads/products/', $filename);
+                $image_path = 'uploads/products/' . $filename;
             }
 
-            $category = Category::create([
+            $product = Product::create([
                 'name' => $request->name,
                 'slug' => Str::of($request->name)->slug('-'),
-                'image' => $image_path
+                'image' => $image_path,
+                'description' => $request->description,
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'category_id' => $request->category_id,
             ]);
 
-            if ($category) {
+            if ($product) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Category add Successfully'
+                    'message' => 'product add Successfully'
                 ]);
             } else {
                 return response()->json([
@@ -86,88 +71,82 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Product $product)
     {
-        if (!$category) {
-            return response()->json([
-                'success' => false,
-                'message' => 'category not found'
-            ]);
-        }
-
         return response()->json([
             'success' => true,
-            'category' => $category
+            'product' => $product
         ]);
     }
-
 
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Product $product)
     {
-        if ($category) {
+        if ($product) {
             if ($request->name) {
-                $category->name = $request->name;
-                $category->slug = Str::of($request->name)->slug('-');
+                $product->name = $request->name;
+                $product->slug = Str::of($request->name)->slug('-');
             }
 
             if ($request->status) {
-                $category->status = $request->status;
+                $product->status = $request->status;
             }
 
             if ($request->hasFile('image')) {
-                $path = $category->image;
-                echo $path;
+                $path = $product->image;
                 if (File::exists($path)) {
                     File::delete($path);
                 }
                 $file = $request->file('image');
                 $extension = $file->getClientOriginalExtension();
                 $filename = rand() . '' . time() . '.' . $extension;
-                $file->move('uploads/categories/', $filename);
-                $category->image = 'uploads/categories/' . $filename;
+                $file->move('uploads/products/', $filename);
+                $product->image = 'uploads/products/' . $filename;
             }
-            $result = $category->save();
+            $result = $product->save();
             if ($result) {
                 return response()->json([
                     'success' => true,
-                    'category' => $category,
-                    'message' => 'Category update Successfully'
+                    'product' => $product,
+                    'message' => 'product update Successfully'
                 ]);
             }
         } else {
             return response()->json([
                 'success' => false,
-                'message' => "Category Not Found"
+                'message' => "product Not Found"
             ]);
         }
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Product $product)
     {
         $path_image = $category->image;
         if (File::exists($path_image)) {
             File::delete($path_image);
         }
-        $category->delete();
+        $product->delete();
         return response()->json([
             'success' => true,
-            'message' => 'category deleted successfully',
+            'message' => 'product deleted successfully',
         ]);
     }
+
+
 }
