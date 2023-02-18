@@ -18,15 +18,17 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description');
-            $table->bigInteger('price');
-            $table->bigInteger('quantity');
+            $table->decimal('price');
+            $table->integer('quantity');
+            $table->float('star')->nullable();
             $table->string('image')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('category_id')
                 ->references('id')->on('categories')
-                ->cascadeOnDelete();
+                ->cascadeOnUpdate();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

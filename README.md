@@ -1,66 +1,61 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ** Introduction **
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+-   This is a project to create an API for an e-commerce website using jsonwebtoken
 
-## About Laravel
+# ** Some pictures test api using postman tool **
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## _(Not logged)_
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   Register Successfully.
+    ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709007/Laravel-api-ecommerce/register_k7mwty.png)
+-   Login Successfully.
+    ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676705557/Laravel-api-ecommerce/Screenshot_63_iv7b7i.png)
+-   Login fail.
+    ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709077/Laravel-api-ecommerce/login_fail_i2mfj4.png)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## _(Logged)_
 
-## Learning Laravel
+-   Check authentication. ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709259/Laravel-api-ecommerce/check_auth_hknu2e.png)
+-   Using token authentication. ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709259/Laravel-api-ecommerce/using_token_ytjsot.png)
+-   Review the product after purchase.
+    ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709635/Laravel-api-ecommerce/review_fail_gcjq1q.png)
+    ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709639/Laravel-api-ecommerce/review_ok_y88itu.png)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## _(Admin)_
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   Check role admin. ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709812/Laravel-api-ecommerce/check_admin_d8zzh8.png)
+-   Get all products by admin. ![Dark mode](https://res.cloudinary.com/dzowctqlx/image/upload/v1676709814/Laravel-api-ecommerce/get_products_blputp.png)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Features
 
-## Laravel Sponsors
+## Auth
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+-   Login, Logout, Register
+-   Refresh token
+-   Email confirmation when registering (unfinished work)
+-   Forgot password (unfinished work)
 
-### Premium Partners
+## Gust
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+-   Search product
+-   Get products, Get products by category
+-   Register
 
-## Contributing
+## User Authentication
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   CRUD carts
+-   Place order
+-   Add product review after successful purchase
+-   Get all orders, get all successfully purchase orders
+-   Update password
+-   Get user info
+-   Online payment (unfinished work)
 
-## Code of Conduct
+## Admin
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   Products Management
+-   Categories Management
+-   Orders Management
+-   Coupons Management
+-   Users Management (unfinished work)
+-   Statistical (unfinished work)

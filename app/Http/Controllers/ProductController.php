@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
@@ -11,9 +12,11 @@ use Illuminate\Support\Facades\File;
 class ProductController extends Controller
 {
 
+
+
     public function index()
     {
-        $products = Product::orderBy('id','desc')->with('category')->get();
+        $products = Product::orderBy('id', 'desc')->with('category')->get();
         return response()->json([
             'success' => true,
             'products' => $products
@@ -82,7 +85,6 @@ class ProductController extends Controller
         ]);
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -97,9 +99,20 @@ class ProductController extends Controller
                 $product->name = $request->name;
                 $product->slug = Str::of($request->name)->slug('-');
             }
-
+            if ($request->description) {
+                $product->description = $request->description;
+            }
             if ($request->status) {
                 $product->status = $request->status;
+            }
+            if ($request->price) {
+                $product->price = $request->price;
+            }
+            if ($request->quantity) {
+                $product->quantity = $request->quantity;
+            }
+            if ($request->category_id) {
+                $product->category_id = $request->category_id;
             }
 
             if ($request->hasFile('image')) {
@@ -137,7 +150,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $path_image = $category->image;
+        $path_image = $product->image;
         if (File::exists($path_image)) {
             File::delete($path_image);
         }
@@ -147,6 +160,4 @@ class ProductController extends Controller
             'message' => 'product deleted successfully',
         ]);
     }
-
-
 }

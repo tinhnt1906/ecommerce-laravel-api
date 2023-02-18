@@ -52,17 +52,10 @@ class AuthController extends Controller
         ]);
     }
 
-    public function userProfile()
-    {
-        return response()->json([
-            'success' => true,
-            'user' => auth()->user()
-        ]);
-    }
+
 
     public function refresh()
     {
-
         return $this->createNewToken(auth()->refresh());
     }
 
